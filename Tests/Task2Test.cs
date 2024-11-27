@@ -47,5 +47,22 @@ namespace Tests
             mockBasicMaths.Verify(m => m.Subtract(10, 5), Times.Once());
             mockBasicMaths.Verify(m => m.Multiply(5,5), Times.Once());  
         }
+
+        [Test]
+        public void AddIntsAndDivideByTwoTest()
+        {
+            var mockBasicMaths = new Mock<IBasicMaths>();
+            mockBasicMaths.Setup(m => m.Add(3, 7)).Returns(10);
+            mockBasicMaths.Setup(m => m.Divide(10, 2)).Returns(5);
+
+            var advancedMaths = new AdvancedMaths(mockBasicMaths.Object);
+
+            double result = advancedMaths.AddIntsAndDivideByTwo(3, 7);
+
+            Assert.That(result, Is.EqualTo(5));
+
+            mockBasicMaths.Verify(m => m.Add(3,7), Times.Once());
+            mockBasicMaths.Verify(m => m.Divide(10, 2), Times.Once());
+        }
     }
 }
