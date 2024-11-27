@@ -64,5 +64,20 @@ namespace Tests
             mockBasicMaths.Verify(m => m.Add(3,7), Times.Once());
             mockBasicMaths.Verify(m => m.Divide(10, 2), Times.Once());
         }
+
+        [Test]
+        public void QuarterAndSubtractOne_Success()
+        {
+            var mockBasicMaths = new Mock<IBasicMaths>();
+            mockBasicMaths.Setup(m => m.Divide(16, 4)).Returns(4);
+            mockBasicMaths.Setup(m => m.Subtract(4, 1)).Returns(3);
+
+            var advancedMaths = new AdvancedMaths(mockBasicMaths.Object);
+
+            int result = advancedMaths.QuarterAndSubtractOne(16);
+
+            mockBasicMaths.Verify(m => m.Divide(16,4), Times.Once());
+            mockBasicMaths.Verify(m => m.Subtract(4,1), Times.Once());
+        }
     }
 }
