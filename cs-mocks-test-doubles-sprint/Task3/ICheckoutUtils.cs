@@ -3,5 +3,9 @@
     public interface ICheckoutUtils
     {
         decimal CalculateIndividualItem(TrolleyItem item);
+
+        decimal DiscountPurchase(TrolleyItem item);
+
+        void LogOfferMessage(decimal amount);
     }
 }

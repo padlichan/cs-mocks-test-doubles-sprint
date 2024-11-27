@@ -1,4 +1,6 @@
-﻿namespace cs_mocks_test_doubles_sprint.Task3
+﻿using FluentAssertions;
+
+namespace cs_mocks_test_doubles_sprint.Task3
 {
        public class ShoppingTrolley
     {
@@ -14,8 +16,11 @@
             decimal totalPrice = 0.0m;
             foreach (TrolleyItem item in trolleyItems)
             {
-                //invoke your method here
+                var itemPrice = _checkoutUtils.CalculateIndividualItem(item);
+                totalPrice += itemPrice >= 50m ? _checkoutUtils.DiscountPurchase(item) : itemPrice;
             }
+            Console.WriteLine(totalPrice);
+            if(totalPrice >= 30m) _checkoutUtils.LogOfferMessage(totalPrice);
             return totalPrice;
         }
     }
