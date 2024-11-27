@@ -79,5 +79,42 @@ namespace Tests
             mockBasicMaths.Verify(m => m.Divide(16,4), Times.Once());
             mockBasicMaths.Verify(m => m.Subtract(4,1), Times.Once());
         }
+
+        [Test]
+        public void MultipyAndDivideTest_ReturnsCorrectForNonZeroDivisor()
+        {
+            //Check if return value is correct
+
+            var advancedMaths = new AdvancedMaths(new BasicMaths());
+
+            double result = advancedMaths.MultiplyAndDivide(4, 3, 6);
+            Assert.That(result, Is.EqualTo(2));
+        }
+
+        [Test]
+        public void MultipyAndDivideTest_ThrowsErrorForZeroDivisor()
+        {
+            //Assert that throws ArgumentOutOfRangeException
+
+            var advancedMaths = new AdvancedMaths(new BasicMaths());
+            Assert.That(() => advancedMaths.MultiplyAndDivide(4, 3, 0), Throws.TypeOf<ArgumentOutOfRangeException>());
+        }
+
+        [Test]
+        public void MultipyAndDivideTest_BasicMAthIsUsedCorrectly()
+        {
+            //Verify
+
+            var mockBasicMaths = new Mock<IBasicMaths>();
+            mockBasicMaths.Setup(m => m.Multiply(3,4)).Returns(12);
+            mockBasicMaths.Setup(m => m.Divide(12,6)).Returns(2);
+
+            var advancedMaths = new AdvancedMaths(mockBasicMaths.Object);
+
+            advancedMaths.MultiplyAndDivide(3, 4, 6);
+
+            mockBasicMaths.Verify(m => m.Multiply(3, 4), Times.Once());
+            mockBasicMaths.Verify(m => m.Divide(12, 6), Times.Once());
+        }
     }
 }

@@ -33,5 +33,10 @@ namespace cs_mocks_test_doubles_sprint.Task2
             int quarter = (int)Math.Round((double)_basicMaths.Divide(value, 4));
             return _basicMaths.Subtract(quarter, 1);
         }
+
+        public double MultiplyAndDivide(int a, int b, int c)
+        {
+            return _basicMaths.Divide(_basicMaths.Multiply(a,b),c);
+        }
     }
 }
