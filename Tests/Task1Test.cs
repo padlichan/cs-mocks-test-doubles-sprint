@@ -33,5 +33,40 @@ namespace Tests
             //Assert
             Assert.That(() => testBasicMaths.Divide(5, 0), Throws.TypeOf<ArgumentOutOfRangeException>());
         }
+
+        [Test, Description("Returns the result when adding two positive integers ")]
+        public void AddTest()
+        {
+            //Arrange
+            var testBasicMaths = new BasicMaths();
+            int expectedResult = 5;
+            //Act
+            var result = testBasicMaths.Add(2, 3);
+
+            //Assert
+            Assert.That(result, Is.EqualTo(expectedResult));
+        }
+
+        [Test, Description("Returns the result when subtracting two integers")]
+        public void SubtractTest()
+        {
+            var testBasicMath = new BasicMaths();
+            int expectedResult = -2;
+
+            int result = testBasicMath.Subtract(1, 3);
+
+            Assert.That(result, Is.EqualTo(expectedResult));
+        }
+
+        [Test, Description("Returns the result when multiplying two integers")]
+        public void MultiplyTest() 
+        {
+            var testBasicMath = new BasicMaths();
+            int expectedResult = 10;
+
+            int result = testBasicMath.Multiply(2, 5);
+
+            Assert.That(result, Is.EqualTo(expectedResult));
+        }
     }
 }
